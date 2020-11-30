@@ -6,7 +6,6 @@ import { borderRadius, grid } from './constants';
 const Container = styled.div`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
-  border-color: blue;
   background-color: ${colors.N0};
   box-shadow: ${({ isDragging }) =>
     isDragging ? `2px 2px 1px ${colors.N70}` : 'none'};
