@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Column from './column';
-import reorder, { reorderQuoteMap } from '../reorder';
+import reorder, { reorderQuoteMap } from './reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 const ParentContainer = styled.div`

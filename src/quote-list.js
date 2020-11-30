@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import { Droppable, Draggable } from '../../../src';
+import styled from 'styled-components';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import QuoteItem from './quote-item';
 import { grid } from './constants';
-import Title from './title';
 
 export const getBackgroundColor = (
   isDraggingOver,
@@ -80,7 +79,7 @@ const InnerQuoteList = React.memo(function InnerQuoteList(
 
 function InnerList(props) {
   const { quotes, dropProvided } = props;
-  const title = props.title ? <Title>{props.title}</Title> : null;
+  const title = props.title ? props.title : null;
 
   return (
     <Container>

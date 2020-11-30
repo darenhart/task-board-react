@@ -1,14 +1,9 @@
-import { colors } from '@atlaskit/theme';
-import finnImg from '../static/media/finn-min.png';
-import bmoImg from '../static/media/bmo-min.png';
-import princessImg from '../static/media/princess-min.png';
-import jakeImg from '../static/media/jake-min.png';
+import colors from './colors';
 
 const jake = {
   id: '1',
   name: 'Jake',
   url: 'http://adventuretime.wikia.com/wiki/Jake',
-  avatarUrl: jakeImg,
   colors: {
     soft: colors.Y50,
     hard: colors.N400A,
@@ -19,7 +14,6 @@ const BMO = {
   id: '2',
   name: 'BMO',
   url: 'http://adventuretime.wikia.com/wiki/BMO',
-  avatarUrl: bmoImg,
   colors: {
     soft: colors.G50,
     hard: colors.N400A,
@@ -30,7 +24,6 @@ const finn = {
   id: '3',
   name: 'Finn',
   url: 'http://adventuretime.wikia.com/wiki/Finn',
-  avatarUrl: finnImg,
   colors: {
     soft: colors.B50,
     hard: colors.N400A,
@@ -41,7 +34,6 @@ const princess = {
   id: '4',
   name: 'Princess bubblegum',
   url: 'http://adventuretime.wikia.com/wiki/Princess_Bubblegum',
-  avatarUrl: princessImg,
   colors: {
     soft: colors.P50,
     hard: colors.N400A,
@@ -116,13 +108,13 @@ export const quotes = [
 ];
 
 // So we do not have any clashes with our hardcoded ones
-let idCount: number = quotes.length + 1;
+let idCount = quotes.length + 1;
 
-export const getQuotes = (count: number): Quote[] =>
+export const getQuotes = (count) =>
   Array.from({ length: count }, (v, k) => k).map(() => {
-    const random: Quote = quotes[Math.floor(Math.random() * quotes.length)];
+    const random = quotes[Math.floor(Math.random() * quotes.length)];
 
-    const custom: Quote = {
+    const custom = {
       ...random,
       id: `G${idCount++}`,
     };
