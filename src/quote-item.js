@@ -3,34 +3,16 @@ import styled from 'styled-components';
 import colors from './colors';
 import { borderRadius, grid } from './constants';
 
-const getBackgroundColor = (isDragging, isGroupedOver, authorColors) => {
-  if (isDragging) {
-    return authorColors.soft;
-  }
-
-  if (isGroupedOver) {
-    return colors.N30;
-  }
-
-  return colors.N0;
-};
-
-const getBorderColor = (isDragging, authorColors) =>
-  isDragging ? authorColors.hard : 'transparent';
-
-const imageSize = 40;
-
 const Container = styled.div`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
-  border-color: ${(props) => getBorderColor(props.isDragging, props.colors)};
-  background-color: ${(props) =>
-    getBackgroundColor(props.isDragging, props.isGroupedOver, props.colors)};
+  border-color: blue;
+  background-color: ${colors.N0};
   box-shadow: ${({ isDragging }) =>
     isDragging ? `2px 2px 1px ${colors.N70}` : 'none'};
   box-sizing: border-box;
   padding: ${grid}px;
-  min-height: ${imageSize}px;
+  min-height: 40px;
   margin-bottom: ${grid}px;
   user-select: none;
   text-decoration: none;
@@ -45,7 +27,6 @@ const Container = styled.div`
 
   &:focus {
     outline: none;
-    border-color: ${(props) => props.colors.hard};
     box-shadow: none;
   }
 
@@ -66,22 +47,6 @@ const Content = styled.div`
   /* flex parent */
   display: flex;
   flex-direction: column;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  margin-top: ${grid}px;
-  align-items: center;
-`;
-
-const Badge = styled.small`
-  color: ${(props) => props.colors.hard};
-  flex-grow: 0;
-  margin: 0;
-  background-color: ${(props) => props.colors.soft};
-  border-radius: ${borderRadius}px;
-  font-weight: normal;
-  padding: ${grid / 2}px;
 `;
 
 function getStyle(provided, style) {
@@ -118,7 +83,6 @@ function QuoteItem(props) {
       isDragging={isDragging}
       isGroupedOver={isGroupedOver}
       isClone={isClone}
-      colors={quote.badge.colors}
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
@@ -126,13 +90,9 @@ function QuoteItem(props) {
       data-is-dragging={isDragging}
       data-testid={quote.id}
       data-index={index}
-      aria-label={`${quote.badge.name} quote ${quote.content}`}
     >
       <Content>
         <div>{quote.content}</div>
-        <Footer>
-          <Badge colors={quote.badge.colors}>{quote.badge.name}</Badge>
-        </Footer>
       </Content>
     </Container>
   );
