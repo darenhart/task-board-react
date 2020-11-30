@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import './App.css';
+import Board from './board';
+import { authorQuoteMap } from './data';
 
 const finalSpaceCharacters = [
   {
@@ -76,6 +78,7 @@ function App() {
       <p>
         Images from <a href="https://final-space.fandom.com/wiki/Final_Space_Wiki">Final Space Wiki</a>
       </p>
+      <Board initial={authorQuoteMap} />
     </div>
   );
 }
