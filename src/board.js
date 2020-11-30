@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Column from './column';
+import colors from './colors';
 import reorder, { reorderQuoteMap } from './reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -11,16 +12,13 @@ const ParentContainer = styled.div`
 `;
 
 const Container = styled.div`
-  background-color: #4C9AFF;
+  background-color: ${colors.B100};
   min-height: 100vh;
-  /* like display:flex but will allow bleeding over the window width */
   min-width: 100vw;
   display: inline-flex;
 `;
 
-
 export default class Board extends Component {
-  /* eslint-disable react/sort-comp */
   static defaultProps = {
     isCombineEnabled: false,
   };

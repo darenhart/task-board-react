@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import styled from 'styled-components';
 import colors from './colors';
@@ -15,10 +14,10 @@ const getBackgroundColor = (
   }
 
   if (isGroupedOver) {
-    return '#EBECF0';
+    return colors.N30;
   }
 
-  return '#FFFFFF';
+  return colors.N0;
 };
 
 const getBorderColor = (isDragging, authorColors) =>
@@ -27,7 +26,7 @@ const getBorderColor = (isDragging, authorColors) =>
 const imageSize = 40;
 
 
-const Container = styled.a`
+const Container = styled.div`
   border-radius: ${borderRadius}px;
   border: 2px solid transparent;
   border-color: ${(props) => getBorderColor(props.isDragging, props.colors)};
@@ -40,6 +39,7 @@ const Container = styled.a`
   min-height: ${imageSize}px;
   margin-bottom: ${grid}px;
   user-select: none;
+  text-decoration: none;
 
   /* anchor overrides */
   color: ${colors.N900};
@@ -47,7 +47,6 @@ const Container = styled.a`
   &:hover,
   &:active {
     color: ${colors.N900};
-    text-decoration: none;
   }
 
   &:focus {
@@ -75,23 +74,13 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-const BlockQuote = styled.div`
-  &::before {
-    content: open-quote;
-  }
-
-  &::after {
-    content: close-quote;
-  }
-`;
-
 const Footer = styled.div`
   display: flex;
   margin-top: ${grid}px;
   align-items: center;
 `;
 
-const Author = styled.small`
+const Badge = styled.small`
   color: ${(props) => props.colors.hard};
   flex-grow: 0;
   margin: 0;
@@ -156,10 +145,9 @@ function QuoteItem(props) {
       aria-label={`${quote.author.name} quote ${quote.content}`}
     >
       <Content>
-        <BlockQuote>{quote.content}</BlockQuote>
+        <div>{quote.content}</div>
         <Footer>
-          <Author colors={quote.author.colors}>{quote.author.name}</Author>
-          <QuoteId>id:{quote.id}</QuoteId>
+          <Badge colors={quote.author.colors}>{quote.author.name}</Badge>
         </Footer>
       </Content>
     </Container>

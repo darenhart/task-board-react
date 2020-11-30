@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
 import Board from './board';
-import { authorQuoteMap } from './data';
+import { data } from './data';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Task board</h1>
-        <Board initial={authorQuoteMap} />
+    <div>
+      <header>
+        <h1>Task Management Board</h1>
+        <Board initial={data} />
       </header>
     </div>
   );

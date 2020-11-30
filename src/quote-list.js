@@ -3,23 +3,10 @@ import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import QuoteItem from './quote-item';
 import { grid } from './constants';
-
-export const getBackgroundColor = (
-  isDraggingOver,
-  isDraggingFrom,
-) => {
-  if (isDraggingOver) {
-    return '#FFEBE6';
-  }
-  if (isDraggingFrom) {
-    return '#E6FCFF';
-  }
-  return ;
-};
+import colors from './colors';
 
 const Wrapper = styled.div`
-  background-color: ${(props) =>
-    getBackgroundColor(props.isDraggingOver, props.isDraggingFrom)};
+  background-color: ${colors.N30};
   display: flex;
   flex-direction: column;
   opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
@@ -53,8 +40,6 @@ const ScrollContainer = styled.div`
 /* stylelint-disable block-no-empty */
 const Container = styled.div``;
 /* stylelint-enable */
-
-
 
 const InnerQuoteList = React.memo(function InnerQuoteList(
   props,
