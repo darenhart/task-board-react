@@ -9,23 +9,14 @@ const reorder = (list, startIndex, endIndex) => {
 
 export default reorder;
 
-
-export const reorderQuoteMap = ({
-  quoteMap,
-  source,
-  destination,
-}) => {
+export const reorderQuoteMap = ({ quoteMap, source, destination }) => {
   const current = [...quoteMap[source.droppableId]];
   const next = [...quoteMap[destination.droppableId]];
   const target = current[source.index];
 
   // moving to same list
   if (source.droppableId === destination.droppableId) {
-    const reordered = reorder(
-      current,
-      source.index,
-      destination.index,
-    );
+    const reordered = reorder(current, source.index, destination.index);
     const result = {
       ...quoteMap,
       [source.droppableId]: reordered,
@@ -53,12 +44,7 @@ export const reorderQuoteMap = ({
   };
 };
 
-export function moveBetween({
-  list1,
-  list2,
-  source,
-  destination,
-}) {
+export function moveBetween({ list1, list2, source, destination }) {
   const newFirst = Array.from(list1.values);
   const newSecond = Array.from(list2.values);
 

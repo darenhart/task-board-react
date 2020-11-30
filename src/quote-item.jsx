@@ -3,12 +3,7 @@ import styled from 'styled-components';
 import colors from './colors';
 import { borderRadius, grid } from './constants';
 
-
-const getBackgroundColor = (
-  isDragging,
-  isGroupedOver,
-  authorColors,
-) => {
+const getBackgroundColor = (isDragging, isGroupedOver, authorColors) => {
   if (isDragging) {
     return authorColors.soft;
   }
@@ -24,7 +19,6 @@ const getBorderColor = (isDragging, authorColors) =>
   isDragging ? authorColors.hard : 'transparent';
 
 const imageSize = 40;
-
 
 const Container = styled.div`
   border-radius: ${borderRadius}px;
@@ -90,15 +84,6 @@ const Badge = styled.small`
   padding: ${grid / 2}px;
 `;
 
-const QuoteId = styled.small`
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin: 0;
-  font-weight: normal;
-  text-overflow: ellipsis;
-  text-align: right;
-`;
-
 function getStyle(provided, style) {
   if (!style) {
     return provided.draggableProps.style;
@@ -130,11 +115,10 @@ function QuoteItem(props) {
 
   return (
     <Container
-      href={quote.author.url}
       isDragging={isDragging}
       isGroupedOver={isGroupedOver}
       isClone={isClone}
-      colors={quote.author.colors}
+      colors={quote.badge.colors}
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
@@ -142,12 +126,12 @@ function QuoteItem(props) {
       data-is-dragging={isDragging}
       data-testid={quote.id}
       data-index={index}
-      aria-label={`${quote.author.name} quote ${quote.content}`}
+      aria-label={`${quote.badge.name} quote ${quote.content}`}
     >
       <Content>
         <div>{quote.content}</div>
         <Footer>
-          <Badge colors={quote.author.colors}>{quote.author.name}</Badge>
+          <Badge colors={quote.badge.colors}>{quote.badge.name}</Badge>
         </Footer>
       </Content>
     </Container>

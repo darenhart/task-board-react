@@ -41,15 +41,10 @@ const ScrollContainer = styled.div`
 const Container = styled.div``;
 /* stylelint-enable */
 
-const InnerQuoteList = React.memo(function InnerQuoteList(
-  props,
-) {
+const InnerQuoteList = React.memo(function InnerQuoteList(props) {
   return props.quotes.map((quote, index) => (
     <Draggable key={quote.id} draggableId={quote.id} index={index}>
-      {(
-        dragProvided,
-        dragSnapshot,
-      ) => (
+      {(dragProvided, dragSnapshot) => (
         <QuoteItem
           key={quote.id}
           quote={quote}
@@ -112,10 +107,7 @@ export default function QuoteList(props) {
           : null
       }
     >
-      {(
-        dropProvided,
-        dropSnapshot,
-      ) => (
+      {(dropProvided, dropSnapshot) => (
         <Wrapper
           style={style}
           isDraggingOver={dropSnapshot.isDraggingOver}

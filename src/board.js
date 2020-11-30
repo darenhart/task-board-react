@@ -71,7 +71,7 @@ export default class Board extends Component {
       const ordered = reorder(
         this.state.ordered,
         source.index,
-        destination.index,
+        destination.index
       );
 
       this.setState({

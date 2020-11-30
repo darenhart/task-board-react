@@ -34,44 +34,43 @@ export const quotes = [
     id: '2',
     content:
       'Sucking at something is the first step towards being sorta good at something.',
-    author: frontend,
+    badge: frontend,
   },
   {
     id: '3',
     content: "You got to focus on what's real, man",
-    author: frontend,
+    badge: frontend,
   },
   {
     id: '4',
     content: 'Is that where creativity comes from? From sad biz?',
-    author: backend,
+    badge: backend,
   },
   {
     id: '5',
     content: 'Homies help homies. Always',
-    author: ux,
+    badge: ux,
   },
   {
     id: '8',
     content:
       "People make mistakes. It's all a part of growing up and you never really stop growing",
-    author: ux,
+    badge: ux,
   },
   {
     id: '9',
     content: "Don't you always call sweatpants 'give up on life pants,' Jake?",
-    author: ux,
+    badge: ux,
   },
 ];
 
-const getByBadge = (author, items) =>
-  items.filter((quote) => quote.author === author);
+const getByBadge = (badge, items) =>
+  items.filter((quote) => quote.badge === badge);
 
 export const data = badges.reduce(
-  (previous, author) => ({
+  (previous, badge) => ({
     ...previous,
-    [author.name]: getByBadge(author, quotes),
+    [badge.name]: getByBadge(badge, quotes),
   }),
-  {},
+  {}
 );
-

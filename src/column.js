@@ -29,9 +29,7 @@ export default class Column extends Component {
       <Draggable draggableId={title} index={index}>
         {(provided, snapshot) => (
           <Container ref={provided.innerRef} {...provided.draggableProps}>
-            <Header isDragging={snapshot.isDragging}>
-                {title}
-            </Header>
+            <Header isDragging={snapshot.isDragging}>{title}</Header>
             <QuoteList
               listId={title}
               listType="QUOTE"
