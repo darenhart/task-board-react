@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Column from './column';
 import colors from './colors';
-import reorder, { reorderQuoteMap } from './reorder';
+import { reorderTaskMap } from './reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-
-const ParentContainer = styled.div`
-  height: ${({ height }) => height};
-  overflow-x: hidden;
-  overflow-y: auto;
-`;
 
 const Container = styled.div`
   background-color: ${colors.B100};
@@ -28,35 +22,13 @@ export default class Board extends Component {
     ordered: Object.keys(this.props.initial),
   };
 
-  boardRef;
-
   onDragEnd = (result) => {
-    if (result.combine) {
-      if (result.type === 'COLUMN') {
-        const shallow = [...this.state.ordered];
-        shallow.splice(result.source.index, 1);
-        this.setState({ ordered: shallow });
-        return;
-      }
-
-      const column = this.state.columns[result.source.droppableId];
-      const withQuoteRemoved = [...column];
-      withQuoteRemoved.splice(result.source.index, 1);
-      const columns = {
-        ...this.state.columns,
-        [result.source.droppableId]: withQuoteRemoved,
-      };
-      this.setState({ columns });
-      return;
-    }
+    const { source, destination } = result;
 
     // dropped nowhere
-    if (!result.destination) {
+    if (!destination) {
       return;
     }
-
-    const source = result.source;
-    const destination = result.destination;
 
     // did not move anywhere - can bail early
     if (
@@ -66,22 +38,7 @@ export default class Board extends Component {
       return;
     }
 
-    // reordering column
-    if (result.type === 'COLUMN') {
-      const ordered = reorder(
-        this.state.ordered,
-        source.index,
-        destination.index
-      );
-
-      this.setState({
-        ordered,
-      });
-
-      return;
-    }
-
-    const data = reorderQuoteMap({
+    const data = reorderTaskMap({
       quoteMap: this.state.columns,
       source,
       destination,
@@ -95,21 +52,9 @@ export default class Board extends Component {
   render() {
     const columns = this.state.columns;
     const ordered = this.state.ordered;
-    const {
-      containerHeight,
-      useClone,
-      isCombineEnabled,
-      withScrollableColumns,
-    } = this.props;
 
     const board = (
-      <Droppable
-        droppableId="board"
-        type="COLUMN"
-        direction="horizontal"
-        ignoreContainerClipping={Boolean(containerHeight)}
-        isCombineEnabled={isCombineEnabled}
-      >
+      <Droppable droppableId="board" direction="horizontal">
         {(provided) => (
           <Container ref={provided.innerRef} {...provided.droppableProps}>
             {ordered.map((key, index) => (
@@ -118,9 +63,6 @@ export default class Board extends Component {
                 index={index}
                 title={key}
                 quotes={columns[key]}
-                isScrollable={withScrollableColumns}
-                isCombineEnabled={isCombineEnabled}
-                useClone={useClone}
               />
             ))}
             {provided.placeholder}
@@ -131,13 +73,7 @@ export default class Board extends Component {
 
     return (
       <React.Fragment>
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          {containerHeight ? (
-            <ParentContainer height={containerHeight}>{board}</ParentContainer>
-          ) : (
-            board
-          )}
-        </DragDropContext>
+        <DragDropContext onDragEnd={this.onDragEnd}>{board}</DragDropContext>
       </React.Fragment>
     );
   }

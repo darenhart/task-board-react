@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import QuoteItem from './quote-item';
@@ -37,9 +37,7 @@ const ScrollContainer = styled.div`
   max-height: ${scrollContainerHeight}px;
 `;
 
-/* stylelint-disable block-no-empty */
 const Container = styled.div``;
-/* stylelint-enable */
 
 const InnerQuoteList = React.memo(function InnerQuoteList(props) {
   return props.quotes.map((quote, index) => (
@@ -59,8 +57,8 @@ const InnerQuoteList = React.memo(function InnerQuoteList(props) {
 
 function InnerList(props) {
   const { quotes, dropProvided } = props;
+  // const [currentQuotes, setQuotes] = useState(quotes);
   const title = props.title ? props.title : null;
-
   return (
     <Container>
       {title}
@@ -68,6 +66,18 @@ function InnerList(props) {
         <InnerQuoteList quotes={quotes} />
         {dropProvided.placeholder}
       </DropZone>
+      <button
+        onClick={() => {
+          const newTask = {
+            content:
+              'Sucking at something is the first step towards being sorta good at something.',
+            id: '2',
+          };
+          // setQuotes([...quotes, newTask]);
+        }}
+      >
+        ADD
+      </button>
     </Container>
   );
 }
