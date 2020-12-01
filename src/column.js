@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import colors from './colors';
 import { grid, borderRadius } from './constants';
-import QuoteList from './quote-list';
+import TaskList from './task-list';
 
 const Container = styled.div`
   margin: ${grid}px;
@@ -30,7 +30,7 @@ export default class Column extends Component {
         {(provided, snapshot) => (
           <Container ref={provided.innerRef} {...provided.draggableProps}>
             <Header isDragging={snapshot.isDragging}>{title}</Header>
-            <QuoteList
+            <TaskList
               listId={title}
               listType="QUOTE"
               style={{

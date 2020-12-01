@@ -66,7 +66,7 @@ function getStyle(provided, style) {
 // Need to be super sure we are not relying on PureComponent here for
 // things we should be doing in the selector as we do not know if consumers
 // will be using PureComponent
-function QuoteItem(props) {
+function TaskItem(props) {
   const {
     quote,
     isDragging,
@@ -97,4 +97,4 @@ function QuoteItem(props) {
   );
 }
 
-export default React.memo(QuoteItem);
+export default React.memo(TaskItem);

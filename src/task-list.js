@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import QuoteItem from './quote-item';
+import TaskItem from './task-item';
 import { grid } from './constants';
 import colors from './colors';
 
@@ -43,7 +43,7 @@ const InnerQuoteList = React.memo(function InnerQuoteList(props) {
   return props.quotes.map((quote, index) => (
     <Draggable key={quote.id} draggableId={quote.id} index={index}>
       {(dragProvided, dragSnapshot) => (
-        <QuoteItem
+        <TaskItem
           key={quote.id}
           quote={quote}
           isDragging={dragSnapshot.isDragging}
@@ -82,7 +82,7 @@ function InnerList(props) {
   );
 }
 
-export default function QuoteList(props) {
+export default function TaskList(props) {
   const {
     ignoreContainerClipping,
     internalScroll,
@@ -107,7 +107,7 @@ export default function QuoteList(props) {
       renderClone={
         useClone
           ? (provided, snapshot, descriptor) => (
-              <QuoteItem
+              <TaskItem
                 quote={quotes[descriptor.source.index]}
                 provided={provided}
                 isDragging={snapshot.isDragging}

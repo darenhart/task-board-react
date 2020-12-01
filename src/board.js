@@ -39,13 +39,13 @@ export default class Board extends Component {
     }
 
     const data = reorderTaskMap({
-      quoteMap: this.state.columns,
+      taskMap: this.state.columns,
       source,
       destination,
     });
 
     this.setState({
-      columns: data.quoteMap,
+      columns: data.taskMap,
     });
   };
 
