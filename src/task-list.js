@@ -39,13 +39,13 @@ const ScrollContainer = styled.div`
 
 const Container = styled.div``;
 
-const InnerQuoteList = React.memo(function InnerQuoteList(props) {
-  return props.quotes.map((quote, index) => (
-    <Draggable key={quote.id} draggableId={quote.id} index={index}>
+const InnerTaskList = React.memo(function InnerTaskList(props) {
+  return props.tasks.map((task, index) => (
+    <Draggable key={task.id} draggableId={task.id} index={index}>
       {(dragProvided, dragSnapshot) => (
         <TaskItem
-          key={quote.id}
-          quote={quote}
+          key={task.id}
+          task={task}
           isDragging={dragSnapshot.isDragging}
           isGroupedOver={Boolean(dragSnapshot.combineTargetFor)}
           provided={dragProvided}
@@ -56,14 +56,14 @@ const InnerQuoteList = React.memo(function InnerQuoteList(props) {
 });
 
 function InnerList(props) {
-  const { quotes, dropProvided } = props;
-  // const [currentQuotes, setQuotes] = useState(quotes);
+  const { tasks, dropProvided } = props;
+  // const [currentTasks, setTasks] = useState(tasks);
   const title = props.title ? props.title : null;
   return (
     <Container>
       {title}
       <DropZone ref={dropProvided.innerRef}>
-        <InnerQuoteList quotes={quotes} />
+        <InnerTaskList tasks={tasks} />
         {dropProvided.placeholder}
       </DropZone>
       <button
@@ -73,7 +73,7 @@ function InnerList(props) {
               'Sucking at something is the first step towards being sorta good at something.',
             id: '2',
           };
-          // setQuotes([...quotes, newTask]);
+          // setTasks([...tasks, newTask]);
         }}
       >
         ADD
@@ -92,7 +92,7 @@ export default function TaskList(props) {
     listId = 'LIST',
     listType,
     style,
-    quotes,
+    tasks,
     title,
     useClone,
   } = props;
@@ -108,7 +108,7 @@ export default function TaskList(props) {
         useClone
           ? (provided, snapshot, descriptor) => (
               <TaskItem
-                quote={quotes[descriptor.source.index]}
+                task={tasks[descriptor.source.index]}
                 provided={provided}
                 isDragging={snapshot.isDragging}
                 isClone
@@ -128,14 +128,14 @@ export default function TaskList(props) {
           {internalScroll ? (
             <ScrollContainer style={scrollContainerStyle}>
               <InnerList
-                quotes={quotes}
+                tasks={tasks}
                 title={title}
                 dropProvided={dropProvided}
               />
             </ScrollContainer>
           ) : (
             <InnerList
-              quotes={quotes}
+              tasks={tasks}
               title={title}
               dropProvided={dropProvided}
             />

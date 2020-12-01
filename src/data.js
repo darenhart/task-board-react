@@ -29,7 +29,7 @@ const ux = {
 
 export const badges = [frontend, backend, ux];
 
-export const quotes = [
+export const tasks = [
   {
     id: '2',
     content:
@@ -65,12 +65,12 @@ export const quotes = [
 ];
 
 const getByBadge = (badge, items) =>
-  items.filter((quote) => quote.badge === badge);
+  items.filter((task) => task.badge === badge);
 
 export const data = badges.reduce(
   (previous, badge) => ({
     ...previous,
-    [badge.name]: getByBadge(badge, quotes),
+    [badge.name]: getByBadge(badge, tasks),
   }),
   {}
 );

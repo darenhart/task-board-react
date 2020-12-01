@@ -68,7 +68,7 @@ function getStyle(provided, style) {
 // will be using PureComponent
 function TaskItem(props) {
   const {
-    quote,
+    task,
     isDragging,
     isGroupedOver,
     provided,
@@ -87,11 +87,11 @@ function TaskItem(props) {
       {...provided.dragHandleProps}
       style={getStyle(provided, style)}
       data-is-dragging={isDragging}
-      data-testid={quote.id}
+      data-testid={task.id}
       data-index={index}
     >
       <Content>
-        <div>{quote.content}</div>
+        <div>{task.content}</div>
       </Content>
     </Container>
   );

@@ -62,7 +62,7 @@ export default class Board extends Component {
                 key={key}
                 index={index}
                 title={key}
-                quotes={columns[key]}
+                tasks={columns[key]}
               />
             ))}
             {provided.placeholder}

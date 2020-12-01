@@ -23,7 +23,7 @@ const Header = styled.div`
 export default class Column extends Component {
   render() {
     const title = this.props.title;
-    const quotes = this.props.quotes;
+    const tasks = this.props.tasks;
     const index = this.props.index;
     return (
       <Draggable draggableId={title} index={index}>
@@ -36,7 +36,7 @@ export default class Column extends Component {
               style={{
                 backgroundColor: snapshot.isDragging ? colors.G50 : null,
               }}
-              quotes={quotes}
+              tasks={tasks}
               internalScroll={this.props.isScrollable}
               isCombineEnabled={Boolean(this.props.isCombineEnabled)}
               useClone={Boolean(this.props.useClone)}
