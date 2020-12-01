@@ -32,7 +32,7 @@ export default class Column extends Component {
             <Header isDragging={snapshot.isDragging}>{title}</Header>
             <TaskList
               listId={title}
-              listType="QUOTE"
+              listType="TASK"
               style={{
                 backgroundColor: snapshot.isDragging ? colors.G50 : null,
               }}
