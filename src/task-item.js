@@ -42,13 +42,25 @@ const Card = styled.div`
 const Content = styled.div``;
 
 const EditButton = styled.button`
+  display: none;
   position: absolute;
   right: 0px;
-  display: none;
+  top: 0px;
   border: none;
   background-color: rgba(255, 255, 255, 0.8);
   float: right;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-image: url(./pen.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 65%;
+  border-radius: ${borderRadius};
+  &:hover {
+    background-color: rgba(240, 240, 240, 0.8);
+  }
 `;
 
 const Textarea = styled.textarea`
@@ -184,9 +196,7 @@ const TaskItem = (props) => {
           onClick={() => {
             setEditing(true);
           }}
-        >
-          EDIT
-        </EditButton>
+        ></EditButton>
         <Content>{task.content}</Content>
       </Card>
     </>
