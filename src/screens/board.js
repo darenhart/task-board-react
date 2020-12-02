@@ -4,7 +4,7 @@ import Column from '../components/column';
 import colors from '../colors';
 import { reorderTaskMap } from '../reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { tasksReducer } from './tasksReducer';
+import { tasksReducer } from './tasks-reducer';
 
 const Container = styled.div`
   background-color: ${colors.N90};
