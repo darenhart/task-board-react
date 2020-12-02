@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskItem from './task-item';
 import { grid } from './constants';
 import colors from './colors';
+import { ContextTasks } from './board';
 
 const Wrapper = styled.div`
   background-color: ${colors.N30};
@@ -22,7 +23,6 @@ const scrollContainerHeight = 250;
 
 const DropZone = styled.div`
   /* stop the list collapsing when empty */
-  min-height: ${scrollContainerHeight}px;
 
   /*
     not relying on the items for a margin-bottom
@@ -35,6 +35,15 @@ const ScrollContainer = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   max-height: ${scrollContainerHeight}px;
+`;
+
+const AddButton = styled.button`
+  border: none;
+  background-color: none;
+  margin: 10px;
+  padding: 5px;
+  cursor: pointer;
+  outline: none;
 `;
 
 const Container = styled.div``;
@@ -55,29 +64,25 @@ const InnerTaskList = React.memo(function InnerTaskList(props) {
   ));
 });
 
-function InnerList(props) {
-  const { tasks, dropProvided } = props;
-  // const [currentTasks, setTasks] = useState(tasks);
-  const title = props.title ? props.title : null;
+function InnerList({ tasks, dropProvided, listId }) {
+  const [, dispatch] = useContext(ContextTasks);
   return (
     <Container>
-      {title}
       <DropZone ref={dropProvided.innerRef}>
         <InnerTaskList tasks={tasks} />
         {dropProvided.placeholder}
       </DropZone>
-      <button
+      <AddButton
         onClick={() => {
-          const newTask = {
-            content:
-              'Sucking at something is the first step towards being sorta good at something.',
-            id: '2',
+          const task = {
+            id: new Date().getTime().toString(),
+            content: 'new item',
           };
-          // setTasks([...tasks, newTask]);
+          dispatch({ type: 'ADD_TO_COLUMN', column: listId, task });
         }}
       >
-        ADD
-      </button>
+        + Add another card
+      </AddButton>
     </Container>
   );
 }
@@ -129,14 +134,14 @@ export default function TaskList(props) {
             <ScrollContainer style={scrollContainerStyle}>
               <InnerList
                 tasks={tasks}
-                title={title}
+                listId={listId}
                 dropProvided={dropProvided}
               />
             </ScrollContainer>
           ) : (
             <InnerList
               tasks={tasks}
-              title={title}
+              listId={listId}
               dropProvided={dropProvided}
             />
           )}

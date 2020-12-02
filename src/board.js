@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, createContext, useReducer } from 'react';
 import styled from 'styled-components';
 import Column from './column';
 import colors from './colors';
 import { reorderTaskMap } from './reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { tasks } from './data';
 
 const Container = styled.div`
   background-color: ${colors.B100};
@@ -12,17 +13,37 @@ const Container = styled.div`
   display: inline-flex;
 `;
 
-export default class Board extends Component {
-  static defaultProps = {
-    isCombineEnabled: false,
-  };
+export const ContextTasks = createContext();
 
-  state = {
-    columns: this.props.initial,
-    ordered: Object.keys(this.props.initial),
-  };
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case 'UPDATED':
+      return {
+        ...state,
+        tasks: action.value,
+      };
 
-  onDragEnd = (result) => {
+    case 'ADD_TO_COLUMN':
+      console.log({ [action.column]: action.task });
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [action.column]: [...state.tasks[action.column], action.task],
+        },
+      };
+
+    default:
+      return state;
+  }
+};
+
+const Board = ({ initial }) => {
+  const [state, dispatch] = useReducer(reducer, { tasks: initial });
+
+  const columnTitles = Object.keys(initial);
+
+  const onDragEnd = (result) => {
     const { source, destination } = result;
 
     // dropped nowhere
@@ -39,42 +60,37 @@ export default class Board extends Component {
     }
 
     const data = reorderTaskMap({
-      taskMap: this.state.columns,
+      taskMap: state.tasks,
       source,
       destination,
     });
 
-    this.setState({
-      columns: data.taskMap,
-    });
+    dispatch({ type: 'UPDATED', value: data.taskMap });
   };
 
-  render() {
-    const columns = this.state.columns;
-    const ordered = this.state.ordered;
+  const board = (
+    <Droppable droppableId="board" direction="horizontal">
+      {(provided) => (
+        <Container ref={provided.innerRef} {...provided.droppableProps}>
+          {columnTitles.map((key, index) => (
+            <Column
+              key={key}
+              index={index}
+              title={key}
+              tasks={state.tasks[key]}
+            />
+          ))}
+          {provided.placeholder}
+        </Container>
+      )}
+    </Droppable>
+  );
 
-    const board = (
-      <Droppable droppableId="board" direction="horizontal">
-        {(provided) => (
-          <Container ref={provided.innerRef} {...provided.droppableProps}>
-            {ordered.map((key, index) => (
-              <Column
-                key={key}
-                index={index}
-                title={key}
-                tasks={columns[key]}
-              />
-            ))}
-            {provided.placeholder}
-          </Container>
-        )}
-      </Droppable>
-    );
+  return (
+    <ContextTasks.Provider value={[state, dispatch]}>
+      <DragDropContext onDragEnd={onDragEnd}>{board}</DragDropContext>
+    </ContextTasks.Provider>
+  );
+};
 
-    return (
-      <React.Fragment>
-        <DragDropContext onDragEnd={this.onDragEnd}>{board}</DragDropContext>
-      </React.Fragment>
-    );
-  }
-}
+export default Board;

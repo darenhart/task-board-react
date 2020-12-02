@@ -13,8 +13,8 @@ const Container = styled.div`
 
 const Header = styled.div`
   display: flex;
+  padding: 10px 20px;
   align-items: center;
-  justify-content: center;
   border-top-left-radius: ${borderRadius}px;
   border-top-right-radius: ${borderRadius}px;
   background-color: ${colors.N30};
