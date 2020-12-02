@@ -1,3 +1,5 @@
+export const version = 1;
+
 const backlog = {
   id: '1',
   name: 'Backlog',
@@ -34,7 +36,7 @@ export const tasks = [
   {
     id: '32',
     content: 'Add version to localStorage',
-    badge: doing,
+    badge: done,
   },
   {
     id: '33',
@@ -48,8 +50,8 @@ export const tasks = [
   },
   {
     id: '35',
-    content: 'Separate files in screen and component folders',
-    badge: doing,
+    content: 'Separate files by screen and component folders',
+    badge: done,
   },
   {
     id: '4',

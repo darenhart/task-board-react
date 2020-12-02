@@ -1,3 +1,5 @@
+import { version } from '../data';
+
 export const tasksReducer = (state, action) => {
   let tasks = {};
   switch (action.type) {
@@ -39,5 +41,6 @@ export const tasksReducer = (state, action) => {
       break;
   }
   localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('version', version);
   return { ...state, tasks };
 };
