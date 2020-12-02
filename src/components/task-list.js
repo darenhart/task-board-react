@@ -22,12 +22,6 @@ const Wrapper = styled.div`
 const scrollContainerHeight = 250;
 
 const DropZone = styled.div`
-  /* stop the list collapsing when empty */
-
-  /*
-    not relying on the items for a margin-bottom
-    as it will collapse when the list is empty
-  */
   padding-bottom: ${grid}px;
 `;
 

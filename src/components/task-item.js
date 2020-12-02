@@ -19,7 +19,6 @@ const Card = styled.div`
   position: relative;
   overflow-wrap: break-word;
 
-  /* anchor overrides */
   color: ${colors.N900};
 
   &:hover,
