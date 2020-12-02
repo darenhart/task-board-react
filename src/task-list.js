@@ -76,7 +76,8 @@ function InnerList({ tasks, dropProvided, listId }) {
         onClick={() => {
           const task = {
             id: new Date().getTime().toString(),
-            content: 'new item',
+            content: '',
+            isNew: true,
           };
           dispatch({ type: 'ADD_TO_COLUMN', column: listId, task });
         }}
@@ -98,7 +99,6 @@ export default function TaskList(props) {
     listType,
     style,
     tasks,
-    title,
     useClone,
   } = props;
 

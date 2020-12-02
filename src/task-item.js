@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { ContextTasks } from './board';
 import colors from './colors';
 import { borderRadius, grid } from './constants';
 
@@ -16,6 +17,7 @@ const Card = styled.div`
   user-select: none;
   text-decoration: none;
   position: relative;
+  overflow-wrap: break-word;
 
   /* anchor overrides */
   color: ${colors.N900};
@@ -56,7 +58,7 @@ const Textarea = styled.textarea`
   font-size: inherit;
   color: inherit;
   outline: none;
-  height: 100px;
+  height: 80px;
   resize: none;
 `;
 
@@ -73,7 +75,7 @@ const Background = styled.div`
 const EditArea = styled.div`
   z-index: 1010;
   position: absolute;
-  width: 300px;
+  width: 250px;
 `;
 
 const Button = styled.button`
@@ -111,18 +113,48 @@ const TaskItem = (props) => {
     index,
   } = props;
 
-  const [editing, setEditing] = useState(false);
+  const [, dispatch] = useContext(ContextTasks);
+
+  const [editing, setEditing] = useState(task.isNew);
+  const [newText, setText] = useState(task.content);
+
+  const save = () => {
+    dispatch({ type: 'EDIT_TASK', taskId: task.id, value: newText });
+    setEditing(false);
+  };
+
+  const onEnterPress = (e) => {
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      save();
+    }
+    if (e.keyCode === 27) {
+      e.preventDefault();
+      setEditing(false);
+    }
+  };
 
   const EditingContainer = (
     <>
-      <Background />
+      <Background onClick={() => setEditing(false)} />
       <EditArea>
         <Card>
-          <Textarea defaultValue={task.content}></Textarea>
+          <Textarea
+            autoFocus
+            onKeyDown={onEnterPress}
+            value={newText}
+            onChange={(e) => setText(e.target.value)}
+          ></Textarea>
         </Card>
         <div>
-          <Button>Save</Button>
-          <Button onClick={() => {}}>Remove</Button>
+          <Button onClick={() => save()}>Save</Button>
+          <Button
+            onClick={() => {
+              dispatch({ type: 'DELETE', taskId: task.id });
+            }}
+          >
+            Remove
+          </Button>
         </div>
       </EditArea>
     </>

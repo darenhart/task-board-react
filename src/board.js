@@ -4,6 +4,7 @@ import Column from './column';
 import colors from './colors';
 import { reorderTaskMap } from './reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { tasksReducer } from './tasksReducer';
 
 const Container = styled.div`
   background-color: ${colors.N90};
@@ -14,30 +15,8 @@ const Container = styled.div`
 
 export const ContextTasks = createContext();
 
-export const reducer = (state, action) => {
-  switch (action.type) {
-    case 'UPDATE':
-      return {
-        ...state,
-        tasks: action.value,
-      };
-
-    case 'ADD_TO_COLUMN':
-      return {
-        ...state,
-        tasks: {
-          ...state.tasks,
-          [action.column]: [...state.tasks[action.column], action.task],
-        },
-      };
-
-    default:
-      return state;
-  }
-};
-
 const Board = ({ initial }) => {
-  const [state, dispatch] = useReducer(reducer, { tasks: initial });
+  const [state, dispatch] = useReducer(tasksReducer, { tasks: initial });
 
   const columnTitles = Object.keys(initial);
 
