@@ -1,13 +1,11 @@
 import React, { createContext, useReducer } from 'react';
 import styled from 'styled-components';
 import Column from '../components/column';
-import colors from '../colors';
 import { reorderTaskMap } from '../reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { tasksReducer } from './tasks-reducer';
 
 const Container = styled.div`
-  background-color: ${colors.N90};
   min-height: 100vh;
   min-width: 100vw;
   display: inline-flex;

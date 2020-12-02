@@ -24,6 +24,11 @@ export const tasks = [
     badge: backlog,
   },
   {
+    id: '51',
+    content: 'Put component style in separate file',
+    badge: backlog,
+  },
+  {
     id: '31',
     content: 'Increase test coverage',
     badge: doing,

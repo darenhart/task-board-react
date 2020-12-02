@@ -1,21 +1,32 @@
 import React from 'react';
-import './App.css';
 import Board from './screens/board';
 import { data, version } from './data';
+import styled from 'styled-components';
+import colors from './colors';
+
+const AppWrapper = styled.div`
+  background-color: ${colors.N90};
+`;
+
+const Title = styled.h2`
+  margin-top: 0;
+  padding: 10px;
+  color: ${colors.N0};
+`;
 
 function App() {
   const localTasks = JSON.parse(localStorage.getItem('tasks'));
   const localVersion = JSON.parse(localStorage.getItem('version'));
 
   return (
-    <div>
+    <AppWrapper>
       <header>
-        <h1>Task Management Board</h1>
+        <Title>TASK MANAGEMENT BOARD</Title>
         <Board
           initial={localTasks && localVersion === version ? localTasks : data}
         />
       </header>
-    </div>
+    </AppWrapper>
   );
 }
 

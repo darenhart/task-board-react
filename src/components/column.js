@@ -18,6 +18,7 @@ const Header = styled.div`
   border-top-left-radius: ${borderRadius}px;
   border-top-right-radius: ${borderRadius}px;
   background-color: ${colors.N30};
+  font-weight: 500;
 `;
 
 export default class Column extends Component {

@@ -38,6 +38,7 @@ const AddButton = styled.button`
   padding: 5px;
   cursor: pointer;
   outline: none;
+  color: ${colors.N700};
 `;
 
 const Container = styled.div``;
