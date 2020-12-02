@@ -1,13 +1,12 @@
-import React, { Component, createContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import styled from 'styled-components';
 import Column from './column';
 import colors from './colors';
 import { reorderTaskMap } from './reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { tasks } from './data';
 
 const Container = styled.div`
-  background-color: ${colors.B100};
+  background-color: ${colors.N90};
   min-height: 100vh;
   min-width: 100vw;
   display: inline-flex;
@@ -17,14 +16,13 @@ export const ContextTasks = createContext();
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'UPDATED':
+    case 'UPDATE':
       return {
         ...state,
         tasks: action.value,
       };
 
     case 'ADD_TO_COLUMN':
-      console.log({ [action.column]: action.task });
       return {
         ...state,
         tasks: {
@@ -65,7 +63,7 @@ const Board = ({ initial }) => {
       destination,
     });
 
-    dispatch({ type: 'UPDATED', value: data.taskMap });
+    dispatch({ type: 'UPDATE', value: data.taskMap });
   };
 
   const board = (

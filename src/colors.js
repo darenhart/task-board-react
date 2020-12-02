@@ -13,6 +13,10 @@ const colors = {
   Y300: '#FFAB00',
   Y400: '#FF991F',
   Y500: '#FF8B00',
+
+  GG250: '#5aac44',
+  GG220: '#6ABC54',
+
   G50: '#E3FCEF',
   G75: '#ABF5D1',
   G100: '#79F2C0',
