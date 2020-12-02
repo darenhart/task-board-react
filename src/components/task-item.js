@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { ContextTasks } from './board';
-import colors from './colors';
-import { borderRadius, grid } from './constants';
+import { ContextTasks } from '../screens/board';
+import colors from '../colors';
+import { borderRadius, grid } from '../constants';
 
 const Card = styled.div`
   border-radius: ${borderRadius}px;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import colors from './colors';
-import { grid, borderRadius } from './constants';
+import colors from '../colors';
+import { grid, borderRadius } from '../constants';
 import TaskList from './task-list';
 
 const Container = styled.div`

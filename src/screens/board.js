@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import styled from 'styled-components';
-import Column from './column';
-import colors from './colors';
-import { reorderTaskMap } from './reorder';
+import Column from '../components/column';
+import colors from '../colors';
+import { reorderTaskMap } from '../reorder';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { tasksReducer } from './tasksReducer';
 

@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import TaskItem from './task-item';
-import { grid } from './constants';
-import colors from './colors';
-import { ContextTasks } from './board';
+import { grid } from '../constants';
+import colors from '../colors';
+import { ContextTasks } from '../screens/board';
 
 const Wrapper = styled.div`
   background-color: ${colors.N30};
