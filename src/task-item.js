@@ -118,25 +118,30 @@ const TaskItem = (props) => {
   const [editing, setEditing] = useState(task.isNew);
   const [newText, setText] = useState(task.content);
 
-  const save = () => {
-    dispatch({ type: 'EDIT_TASK', taskId: task.id, value: newText });
+  const save = (value) => {
+    dispatch({ type: 'EDIT_TASK', taskId: task.id, value });
+    setEditing(false);
+  };
+
+  const cancel = () => {
+    save(task.content);
     setEditing(false);
   };
 
   const onEnterPress = (e) => {
     if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      save();
+      save(newText);
     }
     if (e.keyCode === 27) {
       e.preventDefault();
-      setEditing(false);
+      cancel();
     }
   };
 
   const EditingContainer = (
     <>
-      <Background onClick={() => setEditing(false)} />
+      <Background onClick={() => cancel()} />
       <EditArea>
         <Card>
           <Textarea
@@ -147,7 +152,7 @@ const TaskItem = (props) => {
           ></Textarea>
         </Card>
         <div>
-          <Button onClick={() => save()}>Save</Button>
+          <Button onClick={() => save(newText)}>Save</Button>
           <Button
             onClick={() => {
               dispatch({ type: 'DELETE', taskId: task.id });

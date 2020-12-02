@@ -1,50 +1,43 @@
 export const tasksReducer = (state, action) => {
+  let tasks = {};
   switch (action.type) {
     case 'UPDATE':
-      return {
-        ...state,
-        tasks: action.value,
-      };
+      tasks = action.value;
+      break;
 
     case 'ADD_TO_COLUMN':
-      return {
-        ...state,
-        tasks: {
-          ...state.tasks,
-          [action.column]: [...state.tasks[action.column], action.task],
-        },
+      tasks = {
+        ...state.tasks,
+        [action.column]: [...state.tasks[action.column], action.task],
       };
+      break;
 
     case 'DELETE':
-      const filteredTasks = {};
       Object.keys(state.tasks).map(
         (column) =>
-          (filteredTasks[column] = state.tasks[column].filter(
+          (tasks[column] = state.tasks[column].filter(
             (t) => t.id !== action.taskId
           ))
       );
-      return {
-        ...state,
-        tasks: filteredTasks,
-      };
+      break;
 
     case 'EDIT_TASK':
-      const editedTasks = {};
       Object.keys(state.tasks).map(
         (column) =>
-          (editedTasks[column] = state.tasks[column].map((t) => {
+          (tasks[column] = state.tasks[column].map((t) => {
             if (t.id === action.taskId) {
               t.content = action.value;
+              t.isNew = false;
             }
             return t;
           }))
       );
-      return {
-        ...state,
-        tasks: editedTasks,
-      };
+      break;
 
     default:
-      return state;
+      tasks = state.tasks;
+      break;
   }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  return { ...state, tasks };
 };
