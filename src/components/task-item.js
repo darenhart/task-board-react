@@ -74,7 +74,7 @@ const Textarea = styled.textarea`
 `;
 
 const Background = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   background-color: ${colors.DN400A};
   width: 100%;

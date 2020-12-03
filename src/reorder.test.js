@@ -1,6 +1,3 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-
 import { reorderTaskMap } from './reorder';
 
 test('renders title', () => {
@@ -28,6 +25,5 @@ test('renders title', () => {
     source: { droppableId: 'doing', index: 0 },
     destination: { droppableId: 'done', index: 1 },
   });
-  console.log(data.taskMap);
   expect(data).toStrictEqual({ taskMap: ordered });
 });

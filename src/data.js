@@ -17,93 +17,95 @@ const done = {
 
 export const badges = [backlog, doing, done];
 
+let id = 1;
+
 export const tasks = [
   {
-    id: '51',
+    id: (id++).toString(),
     content: 'Fix warning "Unable to find drag handle"',
     badge: backlog,
   },
   {
-    id: '52',
+    id: (id++).toString(),
     content: 'Put component style in separate file',
     badge: backlog,
   },
   {
-    id: '30',
+    id: (id++).toString(),
     content: 'Increase test coverage',
     badge: doing,
   },
   {
-    id: '31',
+    id: (id++).toString(),
     content: 'Add Readme',
     badge: doing,
   },
   {
-    id: '32',
+    id: (id++).toString(),
     content: 'Add version to localStorage',
     badge: done,
   },
   {
-    id: '33',
+    id: (id++).toString(),
     content: 'Save column name in localStorage',
     badge: doing,
   },
   {
-    id: '34',
+    id: (id++).toString(),
     content: 'Responsive design',
     badge: doing,
   },
   {
-    id: '35',
+    id: (id++).toString(),
     content: 'Separate files by screen and component folders',
     badge: done,
   },
   {
-    id: '4',
+    id: (id++).toString(),
     content: 'Save tasks on localStorage',
     badge: doing,
   },
   {
-    id: '5',
+    id: (id++).toString(),
     content:
       'User can also edit the Names of the Columns by clicking on the Name',
     badge: done,
   },
   {
-    id: '6',
+    id: (id++).toString(),
     content: 'User can also move a Card from one column to another',
     badge: done,
   },
   {
-    id: '7',
+    id: (id++).toString(),
     content: 'User can re-arrange the order of the Cards in a Column',
     badge: done,
   },
   {
-    id: '8',
+    id: (id++).toString(),
     content:
       'When editing a card (Diag. 2, below) the background goes dark and you can edit, save, and delete the card.',
     badge: done,
   },
   {
-    id: '9',
+    id: (id++).toString(),
     content:
       'User can edit the text in a Card by hovering over the Card and clicking the Edit pencil',
     badge: done,
   },
   {
-    id: '10',
+    id: (id++).toString(),
     content:
       'User should be able to add a Card to a column by clicking “Add another card”',
     badge: done,
   },
   {
-    id: '11',
+    id: (id++).toString(),
     content: 'POC with react-beautiful-dnd',
     badge: done,
   },
   {
-    id: '12',
+    id: (id++).toString(),
     content: 'Research existing drag and drop tools',
     badge: done,
   },
