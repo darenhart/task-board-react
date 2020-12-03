@@ -1,4 +1,4 @@
-export const version = 1;
+export const version = 2;
 
 const backlog = {
   id: '1',
@@ -24,12 +24,12 @@ export const tasks = [
     badge: backlog,
   },
   {
-    id: '51',
+    id: '52',
     content: 'Put component style in separate file',
     badge: backlog,
   },
   {
-    id: '31',
+    id: '30',
     content: 'Increase test coverage',
     badge: doing,
   },
